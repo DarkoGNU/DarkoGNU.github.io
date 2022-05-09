@@ -63,7 +63,7 @@ author:
       icon: "fab fa-fw fa-github-square"
       url: "https://github.com/DarkoGNU"
     - label: "E-mail"
-      icon: "fab fa-fw fa-envelope
+      icon: "fab fa-fw fa-envelope"
       url: "mailto:zyzanskidarek@gmail.com"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin-square"
