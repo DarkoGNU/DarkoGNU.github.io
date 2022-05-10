@@ -6,6 +6,12 @@ title: "Projects"
 I've created and published multiple open&#8209;source projects.
 Some of them are certainly worth checking out:
 
+- [SimpleLogo](#simplelogo)
+- [Openwrt-build-script](#openwrt-build-script)
+- [Cuberite](#cuberite-contributor) (contributor)
+- [TNTRun.jl](#tntrunjl)
+- [DarkoASM and DarkoVM](#darkoasm-and-darkovm)
+
 ## [SimpleLogo](https://github.com/DarkoGNU/SimpleLogo)
 
 A [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language)) script interpreter, written in C++.

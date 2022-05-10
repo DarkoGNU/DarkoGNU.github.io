@@ -16,7 +16,7 @@ I'm fairly knowledgeable about the pronunciation of the following languages:
 I'm the best at English phonology. I'm always eager to learn about stuff like
 vowel mergers, cluster reductions, flapping, and other phonological processes.
 
-When it comes to Spanish and Japanese, I don't even speak these
+When it comes to Spanish and Japanese, I don't even speak those
 languages (I'm learning Japanese, though). That doesn't stop me from knowing what are
 the phonemes of these languages, how does the Japanese pitch accent work, and what are
 the differences in pronunciation between different dialects.
@@ -35,3 +35,12 @@ Just like your average AliExpress seller, I didn't ask for permission to use the
 If you're an artist, you can send me an e&#8209;mail and I'll take down my work.
 The girls are [Jahy&#8209;sama](https://twitter.com/aconbwakame/status/1113036854201204736) and
 [Ayanami](https://www.pixiv.net/en/artworks/78790389).
+
+## Writing
+
+I guess that I'm quite talented when it comes to writing. I've been praised for my essays since the elementary school,
+even though I have never been trying particulatry hard - it just comes naturally.
+Also, when my colleagues need help with some tech&#8209;related stuff,
+I'm happy to write a quick tutorial in Markdown and upload it to GitHub Gist.
+
+Now, while creating my personal website, I'm rediscovering my passion for writing.

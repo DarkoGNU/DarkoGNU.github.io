@@ -12,7 +12,7 @@ These are my strongest skills:
 - [C++](#c)
 - [Git](#git)
 - [Translation between Polish and English](#translation-between-polish-and-english)
-- [Basic front&#8209;end](#basic-front-end)
+- [Basic front&#8209;end](#basic-frontend)
 
 ## GNU/Linux administration
 
