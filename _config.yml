@@ -60,26 +60,32 @@ author:
   bio    : "Skilled coder. Knowledgeabe admin. Talented writer"
   links:
     - label: "GitHub"
-      icon: "fab fa-fw fa-github-square"
+      icon: "fab fa-fw fa-github"
       url: "https://github.com/DarkoGNU"
     - label: "E-mail"
-      icon: "fab fa-fw fa-envelope"
+      icon: "fas fa-fw fa-envelope"
       url: "mailto:zyzanskidarek@gmail.com"
     - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin-square"
-      url: "https://www.linkedin.com/in/darkognu/"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/darkognu"
+    - label: "YouTube"
+      icon: "fab fa-fw fa-youtube"
+      url: "https://www.youtube.com/channel/UCKU4YU-WhUD-KBiViVZkI0A"
 
 footer:
   links:
     - label: "GitHub"
-      icon: "fab fa-fw fa-github-square"
+      icon: "fab fa-fw fa-github"
       url: "https://github.com/DarkoGNU"
     - label: "E-mail"
-      icon: "fab fa-fw fa-envelope"
+      icon: "fas fa-fw fa-envelope"
       url: "mailto:zyzanskidarek@gmail.com"
     - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin-square"
-      url: "https://www.linkedin.com/in/darkognu/"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/darkognu"
+    - label: "YouTube"
+      icon: "fab fa-fw fa-youtube"
+      url: "https://www.youtube.com/channel/UCKU4YU-WhUD-KBiViVZkI0A"
 
 defaults:
   # _posts
