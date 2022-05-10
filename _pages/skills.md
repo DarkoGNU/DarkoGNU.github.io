@@ -16,10 +16,10 @@ These are my strongest skills:
 
 ## GNU/Linux administration
 
-I've switched from Windows to GNU/Linux as my main operating system a few years ago and I'm not looking back.
-I'm familiar with multiple distributions, including Fedora, Debian, Arch, Gentoo and OpenWrt.
+I've switched from Windows to GNU/Linux as my main operating system a few years ago, and I'm not looking back.
+I'm familiar with multiple distributions, including Fedora, Debian, Arch, Gentoo, and OpenWrt.
 
-OpenWrt is a particularly interesting one - I use it on my network devices.
+[OpenWrt](https://openwrt.org/) is a particularly interesting one - I use it on my network devices.
 To update my home router and WiFi APs quickly, I've written [openwrt-build-script](https://github.com/DarkoGNU/openwrt-build-script).
 It makes updating my routers as simple as generating the images and flashing them. That's it - even my SSH keys are included!
 
@@ -28,20 +28,21 @@ I use Docker or Podman when it's possible, always with Docker Compose.
 
 ## Game server configuration and management
 
-Among my friends, I'm always the guy who will set up a game server, configure it and install some plugins.
+Among my friends, I'm always the guy who will set up a game server, configure it, and install some plugins.
 It always goes in pair with GNU/Linux administration, as I'm not fond of dedicated game hosting.
-I prefer to buy a VPS, SSH into it and configure everything manually. I like to be in full control.
+I prefer to buy a VPS, SSH into it, and configure everything manually. I like to be in full control.
 
-I'm experienced with hosting these games: Minecraft, Terraria, ARK: Survival Evolved, Assetto Corsa and
-Counter-Strike: Global Offensive.
+I'm experienced with hosting these games: Minecraft, Terraria, ARK: Survival Evolved, Assetto Corsa,
+and Counter-Strike: Global Offensive.
 
 ## C++
 
-This is the language I've used for my Logo language interpreter, [SimpleLogo](https://github.com/DarkoGNU/SimpleLogo).
-It interprets simple scripts that describe a turtle's path. With simple recursion and a few lines of code, beautiful images are generated.
+This is the language I've used for my [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language))
+language interpreter, [SimpleLogo](https://github.com/DarkoGNU/SimpleLogo). It interprets simple scripts that
+describe a turtle's path. With simple recursion and a few lines of code, beautiful images are generated.
 
 SimpleLogo is one of my most algorithmically advanced projects, as interpreting a language that supports recursion isn't an easy task,
-even if it's a very simple programming language.
+even when it's a very simple programming language.
 
 I'm also a contributor to [Cuberite](https://github.com/cuberite/cuberite), an open-source Minecraft server.
 
@@ -49,11 +50,11 @@ I'm also a contributor to [Cuberite](https://github.com/cuberite/cuberite), an o
 
 That's a natural one for someone who's into open-source. I prefer working with Git in the command line instead of using a GUI.
 
-I'm not a Git Guru, but committing, working with branches and merging - that's everyday stuff for me.
+I'm not a Git Guru, but committing, working with branches, merging - that's everyday stuff for me.
 
 ## Translation between Polish and English
 
-Creating bilingual content is not an issue for me. I usually write stuff in English first, then I translate it into Polish.
+I'm capable of creating bilingual content. I usually write stuff in English first, then I translate it into Polish.
 The reason - translating something into your native language is always easier than the other way around.
 
 I can, of course, translate English into Polish, too. The result won't be perfect, just like my English isn't quite native level yet.
