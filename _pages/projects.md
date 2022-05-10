@@ -3,7 +3,7 @@ permalink: /projects/
 title: "Projects"
 ---
 
-I've created and published multiple open-source projects.
+I've created and published multiple open&#8209;source projects.
 Some of them are certainly worth checking out:
 
 ## [SimpleLogo](https://github.com/DarkoGNU/SimpleLogo)
@@ -39,13 +39,13 @@ Some stuff I've done for Cuberite:
 fixing a related bug [(#5402)](https://github.com/cuberite/cuberite/issues/5402)
 - implementing relative player position and look packets [(#5413)](https://github.com/cuberite/cuberite/pull/5413)
 - implementing ranged attack for snow golems [(#5417)](https://github.com/cuberite/cuberite/pull/5417)
-- bug report - mobs don't collide with multi-layer snow [(#5410)](https://github.com/cuberite/cuberite/issues/5410)
+- bug report - mobs don't collide with multi&#8209;layer snow [(#5410)](https://github.com/cuberite/cuberite/issues/5410)
 - bug report - partial blocks not handled correctly by the physics engine [(#2015)](https://github.com/cuberite/cuberite/issues/2015#issuecomment-1103287410)
 
 ## [TNTRun.jl](https://github.com/DarkoGNU/TNTRun.jl)
 
 A Minecraft minigame written in Julia, using [PiCraft.jl](https://github.com/JuliaBerry/PiCraft.jl).
-I wrote it for Julia in [Google Code-in 2019](https://codein.withgoogle.com/).
+I wrote it for Julia in [Google Code&#8209;in 2019](https://codein.withgoogle.com/).
 
 The project is very simple - it's surprising how little code is needed to write a working Minecraft minigame.
 That's a good thing - TNTRun.jl is supposed to show other Julia coders the basics of writing Minecraft plugins in Julia.
