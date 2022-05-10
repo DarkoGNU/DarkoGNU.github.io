@@ -57,7 +57,7 @@ I'm not a Git Guru, but committing, working with branches, merging - that's ever
 I'm capable of creating bilingual content. I usually write stuff in English first, then I translate it into Polish.
 The reason - translating something into your native language is always easier than the other way around.
 
-I can, of course, translate English into Polish, too. The result won't be perfect, just like my English isn't quite native level yet.
+I can, of course, translate English to Polish, too. The result won't be perfect, just like my English isn't quite native level yet.
 But it will usually be good enough :)
 
 ## Basic front&#8209;end

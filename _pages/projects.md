@@ -10,7 +10,7 @@ Some of them are certainly worth checking out:
 - [Openwrt-build-script](#openwrt-build-script)
 - [Cuberite](#cuberite-contributor) (contributor)
 - [TNTRun.jl](#tntrunjl)
-- [DarkoASM and DarkoVM](#darkoasm-and-darkovm)
+- [DarkoASM](#darkoasm-and-darkovm) and [DarkoVM](#darkoasm-and-darkovm)
 
 ## [SimpleLogo](https://github.com/DarkoGNU/SimpleLogo)
 

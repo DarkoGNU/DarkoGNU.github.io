@@ -30,6 +30,9 @@ paginate: 5 # amount of posts to show
 paginate_path: /page:num/
 timezone: PL
 
+# Additional settings
+title_separator: "|"
+
 include:
   - _pages
 
