@@ -63,22 +63,22 @@ Here are some of my all-time favorites:
 
 ##### Ganja White Night - Trinity
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/MY7SytvTYjA&origin=https://darkognu.eu" title="Ganja White Night - Trinity"
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MY7SytvTYjA" title="Ganja White Night - Trinity"
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ##### love solfege - protomimesis#14
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dPLKc5tdvo0&origin=https://darkognu.eu" title="love solfege - protomimesis#14"
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dPLKc5tdvo0" title="love solfege - protomimesis#14"
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ##### Camellia - STEELFUCK
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/texMuiGrafk&origin=https://darkognu.eu" title="Camellia - STEELFUCK"
+<iframe width="560" height="315" src="https://www.youtube.com/embed/texMuiGrafk" title="Camellia - STEELFUCK"
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ##### Seraph - For Black, Dear Dahlia
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KtSdO-w3z08&origin=https://darkognu.eu" title="Seraph - For Black, Dear Dahlia"
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KtSdO-w3z08" title="Seraph - For Black, Dear Dahlia"
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <br>
 You can check out my playlist [here](https://youtube.com/playlist?list=PLPa9qwFC6sQucfaqDZ1zvwW9LU7vqosNi).
