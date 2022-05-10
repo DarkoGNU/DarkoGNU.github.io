@@ -11,15 +11,15 @@ Some of them are certainly worth checking out:
 A [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language)) script interpreter, written in C++.
 
 Logo is a programming language that describes a turtle's path. The turtle leaves a trail of pixels.
-SimpleLogo executes Logo script, producing interesting imagery as a result.
+SimpleLogo executes Logo scripts, producing interesting imagery as a result.
 
-An earlier version transpiled Logo scripts to Lua and executed them using Lua Virtual Machine.
+An earlier version transpiled Logo scripts to Lua and executed them using the Lua Virtual Machine.
 You can find a relevant commit [here](https://github.com/DarkoGNU/SimpleLogo/tree/38a22f4149b2c8dacb21768e56b1f4da0d5791e6).
 The current interpreter doesn't use any external libraries, except for [png++](https://www.nongnu.org/pngpp/),
 a C++ wrapper for [libpng](http://www.libpng.org/pub/png/libpng.html).
 
 That's probably one of my most impressive projects, as interpreting a programming language is never a simple task.
-One of the most tricky parts was recursion. I'm happy I was able to implement the interpreter on my own.
+One of the most tricky parts was recursion, I'm happy I was able to deal with it!
 
 ## [Openwrt-build-script](https://github.com/DarkoGNU/openwrt-build-script)
 
