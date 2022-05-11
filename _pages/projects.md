@@ -62,6 +62,6 @@ Writing an assembler and a virtual machine - these assignments are part of the
 [nand2tetris](https://www.nand2tetris.org/) course.
 
 DarkoVM and DarkoASM helped me to improve my understanding of machine languages and virtual machines.
-What I've also learned about is how compilation works.
+What I also learned about is how compilation works.
 
 I recommend nand2tetris to everyone who's willing to learn the basics of computer science.
