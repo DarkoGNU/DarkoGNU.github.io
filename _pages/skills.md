@@ -37,7 +37,7 @@ and Counter&#8209;Strike: Global Offensive.
 
 ## C++
 
-This is the language I've used for my [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language))
+This is the language I used for my [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language))
 language interpreter, [SimpleLogo](https://github.com/DarkoGNU/SimpleLogo). It interprets simple scripts that
 describe a turtle's path. With simple recursion and a few lines of code, beautiful images are generated.
 
