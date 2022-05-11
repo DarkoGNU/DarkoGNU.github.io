@@ -16,7 +16,7 @@ These are my strongest skills:
 
 ## GNU/Linux administration
 
-I've switched from Windows to GNU/Linux as my main operating system a few years ago, and I'm not looking back.
+I switched from Windows to GNU/Linux as my main operating system a few years ago, and I'm not looking back.
 I'm familiar with multiple distributions, including Fedora, Debian, Arch, Gentoo, and OpenWrt.
 
 [OpenWrt](https://openwrt.org/) is a particularly interesting one - I use it on my network devices.
