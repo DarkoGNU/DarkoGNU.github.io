@@ -36,7 +36,7 @@ that play either on Polish dialects or the differences between spelling and pron
 I'm far from being a professional photo editor or a digital artist, but I know some
 basic stuff. For example, I designed this e&#8209;liquid label. I'm really proud of my work!
 
-![E&#8209;liquid label](/assets/articles/e-liquid-label.webp)
+![E&#8209;liquid label](/assets/images/interests/e-liquid-label.webp)
 
 Just like your average AliExpress seller, I didn't ask for permission to use these anime girls.
 If you're a copyright holder of those images and you're not happy with me using them,
