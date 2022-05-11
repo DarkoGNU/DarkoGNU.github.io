@@ -34,7 +34,7 @@ that play either on Polish dialects or the differences between spelling and pron
 ## Image editing
 
 I'm far from being a professional photo editor or a digital artist, but I know some
-basic stuff. For example, I've designed this e&#8209;liquid label. I'm really proud of my work!
+basic stuff. For example, I designed this e&#8209;liquid label. I'm really proud of my work!
 
 ![E&#8209;liquid label](/assets/articles/e-liquid-label.webp)
 
