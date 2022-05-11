@@ -53,7 +53,7 @@ fixing a related bug [(#5402)](https://github.com/cuberite/cuberite/issues/5402)
 A Minecraft minigame written in Julia, using [PiCraft.jl](https://github.com/JuliaBerry/PiCraft.jl).
 I wrote it for Julia in [Google Code&#8209;in 2019](https://codein.withgoogle.com/).
 
-The project is very simple - it's surprising how little code is needed to write a working Minecraft minigame.
+The project is really simple - it's surprising how little code is needed to write a working Minecraft minigame.
 That's a good thing - TNTRun.jl is supposed to show other Julia coders the basics of writing Minecraft plugins in Julia.
 
 ## [DarkoASM](https://github.com/DarkoGNU/DarkoASM) and [DarkoVM](https://github.com/DarkoGNU/DarkoVM)
@@ -61,7 +61,7 @@ That's a good thing - TNTRun.jl is supposed to show other Julia coders the basic
 Writing an assembler and a virtual machine - these assignments are part of the
 [nand2tetris](https://www.nand2tetris.org/) course.
 
-DarkoVM and DarkoASM helped me to improve my understanding of machine languages and virtual machines.
+DarkoVM and DarkoASM helped me improve my understanding of machine languages and virtual machines.
 What I also learned about is how compilation works.
 
-I recommend nand2tetris to everyone who's willing to learn the basics of computer science.
+I recommend nand2tetris to everyone willing to learn the basics of computer science.

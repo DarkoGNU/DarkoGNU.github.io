@@ -25,7 +25,7 @@ vowel mergers, cluster reductions, flapping, and other phonological processes.
 
 When it comes to Spanish and Japanese, I don't even speak those
 languages (I'm learning Japanese, though). That doesn't stop me from knowing what are
-the phonemes of them, how does the Japanese pitch accent work, and what are
+the phonemes of them, how the Japanese pitch accent works, and what are
 the differences in pronunciation between different dialects.
 
 Also, knowing the intrinsics of Polish phonology allows me to understand memes and jokes
@@ -46,8 +46,8 @@ The girls are [Jahy&#8209;sama](https://twitter.com/aconbwakame/status/111303685
 
 ## Writing
 
-I guess that I'm quite talented when it comes to writing. I've been praised for my essays since the elementary school,
-even though I have never been trying particulatry hard - it just comes naturally.
+I guess that I'm quite talented when it comes to writing. I've been praised for my essays since elementary school,
+even though I have never been trying particularly hard - it just comes naturally.
 Also, when my colleagues need help with some tech&#8209;related stuff,
 I'm happy to write a quick tutorial in Markdown and upload it to GitHub Gist.
 
@@ -83,7 +83,7 @@ frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <br>
 You can check out my playlist [here](https://youtube.com/playlist?list=PLPa9qwFC6sQucfaqDZ1zvwW9LU7vqosNi).
-There's no Spotify version, unfortunately. YouTube is the best streaming platform for underground music fans,
+There's no Spotify version, unfortunately. YouTube is the best streaming platform for underground music fans
 because a lot of unpopular songs just aren't available on Spotify!
 
 Also, you can easily upload a song to YouTube yourself. For example, I had to upload
