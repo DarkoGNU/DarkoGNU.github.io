@@ -39,7 +39,8 @@ basic stuff. For example, I designed this e&#8209;liquid label. I'm really proud
 ![E&#8209;liquid label](/assets/articles/e-liquid-label.webp)
 
 Just like your average AliExpress seller, I didn't ask for permission to use these anime girls.
-If you're a copyright holder of those images, you can send me an e&#8209;mail and I'll take down my work.
+If you're a copyright holder of those images and you're not happy with me using them,
+you can send me an e&#8209;mail and I'll take down my work.
 The girls are [Jahy&#8209;sama](https://twitter.com/aconbwakame/status/1113036854201204736) and
 [Ayanami](https://www.pixiv.net/en/artworks/78790389).
 
