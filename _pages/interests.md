@@ -34,21 +34,21 @@ that play either on Polish dialects or the differences between spelling and pron
 ## Image editing
 
 I'm far from being a professional photo editor or a digital artist, but I know some
-basic stuff. For example, I designed this e&#8209;liquid label. I'm really proud of my work!
+basic stuff. For example, I designed this e-liquid label. I'm really proud of my work!
 
-![E&#8209;liquid label](/assets/images/interests/e-liquid-label.webp)
+![E-liquid label](/assets/images/interests/e-liquid-label.webp)
 
 Just like your average AliExpress seller, I didn't ask for permission to use these anime girls.
 If you're a copyright holder of those images and you're not happy with me using them,
-you can send me an e&#8209;mail and I'll take down my work.
-The girls are [Jahy&#8209;sama](https://twitter.com/aconbwakame/status/1113036854201204736) and
+you can send me an e-mail and I'll take down my work.
+The girls are [Jahy-sama](https://twitter.com/aconbwakame/status/1113036854201204736) and
 [Ayanami](https://www.pixiv.net/en/artworks/78790389).
 
 ## Writing
 
 I guess that I'm quite talented when it comes to writing. I've been praised for my essays since elementary school,
 even though I have never been trying particularly hard - it just comes naturally.
-Also, when my colleagues need help with some tech&#8209;related stuff,
+Also, when my colleagues need help with some tech-related stuff,
 I'm happy to write a quick tutorial in Markdown and upload it to GitHub Gist.
 
 Now, while creating my personal website, I'm rediscovering my passion for writing.

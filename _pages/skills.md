@@ -3,7 +3,7 @@ permalink: /skills/
 title: "Skills"
 ---
 
-As an open&#8209;source enthusiast, I've worked with multiple technologies and programming languages.
+As an open-source enthusiast, I've worked with multiple technologies and programming languages.
 
 These are my strongest skills:
 
@@ -12,7 +12,7 @@ These are my strongest skills:
 - [C++](#c)
 - [Git](#git)
 - [Translation between Polish and English](#translation-between-polish-and-english)
-- [Basic front&#8209;end](#basic-frontend)
+- [Basic front-end](#basic-frontend)
 
 ## GNU/Linux administration
 
@@ -33,7 +33,7 @@ It always goes in pair with GNU/Linux administration, as I'm not fond of dedicat
 I prefer to buy a VPS, SSH into it, and configure everything manually. I like to be in full control.
 
 I'm experienced with hosting these games: Minecraft, Terraria, ARK: Survival Evolved, Assetto Corsa,
-and Counter&#8209;Strike: Global Offensive.
+and Counter-Strike: Global Offensive.
 
 ## C++
 
@@ -44,11 +44,11 @@ describe a turtle's path. With simple recursion and a few lines of code, beautif
 SimpleLogo is one of my most algorithmically advanced projects, as interpreting a language that supports recursion isn't an easy task,
 even when it's a very simple programming language.
 
-I'm also a contributor to [Cuberite](https://github.com/cuberite/cuberite), an open&#8209;source Minecraft server.
+I'm also a contributor to [Cuberite](https://github.com/cuberite/cuberite), an open-source Minecraft server.
 
 ## Git
 
-That's a natural one for someone who's into open&#8209;source. I prefer working with Git in the command line instead of using a GUI.
+That's a natural one for someone who's into open-source. I prefer working with Git in the command line instead of using a GUI.
 
 I'm not a Git Guru, but committing, working with branches, merging - that's everyday stuff for me.
 
@@ -60,9 +60,9 @@ The reason - translating something into your native language is always easier th
 I can, of course, translate English to Polish, too. The result won't be perfect, just like my English isn't at a native level yet.
 But it will usually be good enough :)
 
-## Basic front&#8209;end
+## Basic front-end
 
-If I can make a simple website, I think I'm allowed to say that I know how to do some basic front&#8209;end stuff.
+If I can make a simple website, I think I'm allowed to say that I know how to do some basic front-end stuff.
 
 That's nothing fancy, of course. DarkoGNU.eu uses [Jekyll](https://jekyllrb.com/), a static website generator,
 and a theme called [Minimal Mistakes](https://mademistakes.com/work/minimal-mistakes-jekyll-theme/).
