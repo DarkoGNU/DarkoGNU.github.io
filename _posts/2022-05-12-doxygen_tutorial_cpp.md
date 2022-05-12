@@ -331,7 +331,7 @@ is saved with UTF-8 encoding. Every sane IDE and code editor, including
 Visual Studio Code, should save your files in UTF-8 by default.
 
 Unfortunately, that's not true for Visual Studio, which uses regional encoding
-by default! I don't what Microsoft was thinking, but now, you have to make sure
+by default! I don't know what Microsoft was thinking, but now, you have to make sure
 that your files are saved with UTF-8.
 
 Alternatively, you can change the encoding in Doxywizard.
