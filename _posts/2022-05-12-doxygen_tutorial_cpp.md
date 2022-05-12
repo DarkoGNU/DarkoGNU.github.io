@@ -10,17 +10,39 @@ tags:
   - programming
   - windows
   - linux
-published: false
+  - latex
 excerpt: "At the university, we had to write a project in C++. Yeah, the algorithms were quite hard,
 it was the first semester, a lot of students have never programmed before, but for many,
-the most difficult thing wasn't stricly programming."
+the most difficult thing wasn't strictly programming."
 ---
+
+## Table of contents
+
+- [Introduction](#introduction)
+- [Installing the required software](#installing-the-required-software)
+  * [Windows](#windows)
+  * [Linux](#linux)
+    + [Arch Linux, Manjaro](#arch-linux-manjaro)
+    + [Debian, Ubuntu](#debian-ubuntu)
+    + [Fedora](#fedora)
+- [Documenting the code](#documenting-the-code)
+  * [What should be documented](#what-should-be-documented)
+  * [The structure of a Doxygen comment](#the-structure-of-a-doxygen-comment)
+  * [Doxygen commands](#doxygen-commands)
+  * [IDE configuration](#ide-configuration)
+- [File encoding](#file-encoding)
+- [Generating the documentation](#generating-the-documentation)
+- [Compiling your documentation](#compiling-your-documentation)
+  * [Linux](#linux-1)
+  * [Windows](#windows-1)
+- [Troubleshooting](#troubleshooting)
+- [Summary](#summary)
 
 ## Introduction
 
 At the university, we had to write a project in C++. Yeah, the algorithms were quite hard,
 it was the first semester, a lot of students have never programmed before, but for many,
-the most difficult thing wasn't stricly programming.
+the most difficult thing wasn't strictly programming.
 
 It was Doxygen. We were required to document our programs using the Doxygen format,
 generate PDFs, and send them along with the source code. In order to help my colleagues,
@@ -28,7 +50,7 @@ I had decided to write a guide in Markdown, upload it to GitHub Gist, and voilà
 Documentation wasn't an issue anymore.
 
 The original guide is written in Polish. I'm presenting to you an English translation,
-trimmed down and improved. I hope it'll help you document your code!
+extended and improved. I hope it'll help you document your code!
 
 ## Installing the required software
 
@@ -40,7 +62,7 @@ trimmed down and improved. I hope it'll help you document your code!
 2. Download the installer for Windows. ![Download Doxygen](/assets/images/doxygen-guide/doxygen-download.webp)
 3. Install Doxygen with default settings.
 
-#### TeX
+#### LaTeX
 
 1. Go to [https://miktex.org/download](https://miktex.org/download).
 2. Download the installer for Windows. ![Download MiKTeX](/assets/images/doxygen-guide/miktex-download.webp)
@@ -54,7 +76,7 @@ If you don't need that, you don't need to install Graphviz.
 
 1. Go to [https://graphviz.org/download/](https://graphviz.org/download/).
 2. Download the installer for Windows. ![Download Graphviz](/assets/images/doxygen-guide/graphviz-download.webp)
-3. Install Graphviz. Make sure to add it to path, or else Doxygen won't find it. ![Configure Graphviz](/assets/images/doxygen-guide/graphviz-config.webp)
+3. Install Graphviz. Make sure to add it to the PATH, or else Doxygen won't find it. ![Configure Graphviz](/assets/images/doxygen-guide/graphviz-config.webp)
 
 ### Linux
 
@@ -70,9 +92,9 @@ sudo pacman -S doxygen
 sudo pacman -S --asdeps qt5-base
 ```
 
-qt5-base is required for Doxywizard.
+`qt5-base` is required for Doxywizard.
 
-###### TeX
+###### LaTeX
 
 ```bash
 sudo pacman -S texlive-most
@@ -95,7 +117,7 @@ sudo apt update
 sudo apt install doxygen doxygen-gui
 ```
 
-###### TeX
+###### LaTeX
 
 ```bash
 sudo apt update
@@ -122,7 +144,7 @@ sudo apt install graphviz
 sudo dnf install doxygen doxygen-doxywizard
 ```
 
-###### TeX
+###### LaTeX
 
 ```bash
 sudo dnf install doxygen-latex
@@ -130,11 +152,11 @@ sudo dnf install doxygen-latex
 
 This metapackage should contain everything you need. In case it doesn't,
 refer to the [Fedora Docs](https://docs.fedoraproject.org/en-US/neurofedora/latex/)
-and either install missing packages selectively, or install a set of packages (like `texlive-scheme-full`).
+and either install missing packages selectively or install a set of packages (like `texlive-scheme-full`).
 
 ###### Graphviz (optional)
 
-You shouldn't need to install Graphviz manually under Fedora, as it's a dependency of Doxygen.
+You shouldn't need to install Graphviz manually under Fedora, as Doxygen has a dependency on it.
 But, in case someone needs the command anyway:
 
 ```bash
@@ -145,7 +167,7 @@ sudo dnf install graphviz
 
 ### What should be documented
 
-In case of C++, you should document the following stuff:
+For C++, you should document the following stuff:
 
 - files
 - namespaces
@@ -191,7 +213,7 @@ const int secretNumber; /**< The secret number */
 
 ### Doxygen commands
 
-Knowing the structure of a comment isn't enough to write documentation.
+Knowing the structure of a comment isn't enough to write the documentation.
 You need some commands to tell Doxygen what exactly you're describing.
 
 The most important commands are:
@@ -251,7 +273,7 @@ A description of the returned value. Naturally, void functions don't need that.
 /**
  * @brief Get a reference to tiles.
  *
- * @return a refrence to a flat 2D vector representing the tiles
+ * @return reference to a flat 2D vector representing the tiles
  */
 std::vector<bool> const &getTiles() const;
 ```
@@ -376,14 +398,14 @@ undocumented entities in the documentation.
 set it up like that:
 ![Topic - Diagrams](/assets/images/doxygen-guide/wizard-diagrams-page.webp)
 As a result, Doxygen will generate stuff like this: ![Graphs](/assets/images/doxygen-guide/call-caller-graph.webp)
-If you don't need these crazy graphs, just leave the default setting
+If you don't need these crazy graphs, just use the default setting
 ('Use built-in class diagram generator').
 10. If you want your documentation in a language other than English, you need to visit
 the 'Project' topic under the 'Expert' tab.
 ![Language](/assets/images/doxygen-guide/wizard-expert-language.webp)
 11. If your project contains classes or structures, you need to know that, by default,
 the documentation is generated only for public members. If you want to change that
-behavior, you need to visit the 'Build' topic under the 'Expert tab', and tune the settings.
+behavior, you need to visit the 'Build' topic under the 'Expert tab' and tune the settings.
 I highlighted the most important ones.
 ![OOP docs](/assets/images/doxygen-guide/wizard-expert-oop.webp)
 12. Finally, you're ready to generate your docs! Just click that
@@ -397,19 +419,50 @@ LaTeX files generated by Doxygen. Fortunately, it should be very simple:
 
 ### Linux
 
-1. Enter Docs/latex
+1. Enter `Docs/latex`.
 2. Run the following command:
 ```bash
 pdflatex refman.tex
 ```
+3. Check the resulting file, `refman.pdf`.
 
-Naturally, I hope that you, as a Linux user, know how to use a terminal.
-Because you're not clicking some `.bat` file, you'll simply see any errors.
+Naturally, I hope that you, as a Linux user, know how to use the terminal.
+Because you're not clicking any `.bat` file, you'll simply see any errors.
 
 If you can't generate your docs, or there is an issue with them, refer to
 the [troubleshooting](#troubleshooting) section.
 
 ### Windows
+
+You can do everything graphically, but if there's an error,
+you may need to open the PowerShell console and run the script
+manually.
+
+#### Graphical way
+
+1. Enter `Docs/latex`.
+2. Run `make.bat`. You can just double-click on it.
+3. Check the resulting file, `refman.pdf`.
+
+If there's an issue with your docs, refer to the
+[troubleshooting](#troubleshooting) section. If you can't generate them,
+and you can't see any error message (the terminal window closes automatically),
+you need to run the script manually with PowerShell. If you can see the error message,
+you can already go to [troubleshooting](#troubleshooting).
+
+#### PowerShell way
+
+1. Enter `Docs/latex`.
+2. Enter `powershell` in the Explorer's address bar.
+![Launching PowerShell](/assets/images/doxygen-guide/starting-powershell.webp)
+3. Enter this command:
+```
+.\make.bat
+```
+Press enter.
+
+Now, the terminal window won't close automatically. You'll be able to see
+the error and you can refer to the [troubleshooting](#troubleshooting) section.
 
 ## Troubleshooting
 
@@ -423,13 +476,13 @@ These are errors like this one:
 ```
 
 The easiest fix - just remove the unsupported character.
-For example, I could replace '😃' with ':)'.
+For example, I could replace '😃' with ':-)'.
 
 ### National alphabet characters aren't rendered properly
 
 So, you open the PDF, and something's wrong… national
 alphabet characters, like the Polish letters with diacritics
-(e.g. ą, ę) are either rendered without the diacritics, or they
+(e.g. ą, ę) are either rendered without the diacritics or they
 are completely skipped!
 
 That's probably an encoding issue. Refer to [File encoding](#file-encoding).
@@ -438,3 +491,20 @@ That's probably an encoding issue. Refer to [File encoding](#file-encoding).
 
 That's mostly a Linux issue, as on Windows, MiKTeX should download all required
 packages on-the-fly.
+
+If you're a Linux user, refer to [this section](#linux).
+
+If you're a Windows user, make sure that you have
+an internet connection and check the MiKTeX settings.
+You'll find them in the MiKTeX console.
+
+![MiKTeX Console](/assets/images/doxygen-guide/miktex-console.webp)
+
+## Summary
+
+I hope you've found my article helpful. In case there's
+an error, you have a suggestion, or you just want to talk -
+you can send me an e-mail. Also, don't forget that DarkoGNU.eu
+is open-source, so you can open an [issue](https://github.com/DarkoGNU/darkognu.github.io/issues),
+submit a [pull request](https://github.com/DarkoGNU/darkognu.github.io/pulls),
+or even start a [discussion](https://github.com/DarkoGNU/darkognu.github.io/discussions).
