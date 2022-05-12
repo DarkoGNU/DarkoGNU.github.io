@@ -71,22 +71,8 @@ qt5-base is required for Doxywizard.
 
 ###### TeX
 
-You have two choices. You can install TeX Live from the official repositories,
-or you can install MiKTeX from the AUR. I personally prefer MiKTeX,
-as it downloads only the packages that are needed.
-
-Installing MiKTeX using an AUR helper (yay):
-
 ```bash
-yay -S miktex
-```
-
-If you need help with installing yay, refer to [the official GitHub repo](https://github.com/Jguer/yay#installation).
-
-Installing TeX Live:
-
-```bash
-sudo pacman -S texlive-core
+sudo pacman -S texlive-most
 ```
 
 You may also need other packages, like `texlive-lang`. Please refer to the [Arch Wiki](https://wiki.archlinux.org/title/TeX_Live#Installation).
@@ -108,13 +94,6 @@ sudo apt install doxygen doxygen-gui
 
 ###### TeX
 
-You have two choices (again). You can install TeX Live from the official repositories,
-or you can install MiKTeX from an unofficial repository.
-
-Installing MiKTeX from an unofficial repo: follow [this guide](https://miktex.org/howto/install-miktex-unx).
-
-Installing TeX Live:
-
 ```bash
 sudo apt update
 sudo apt install doxygen-latex
@@ -123,7 +102,7 @@ sudo apt install doxygen-latex
 This metapackage should contain everything you need. In case it doesn't,
 look at the source package [texlive-base](https://packages.debian.org/source/sid/texlive-base)
 and install additional components selectively. If you don't mind downloading and installing
-gigabytes of TeX packages, ou can also choose to install [texlive-full](https://packages.debian.org/sid/texlive-full).
+gigabytes of TeX packages, you can also choose to install [texlive-full](https://packages.debian.org/sid/texlive-full).
 
 ###### Graphviz (optional)
 
@@ -141,13 +120,6 @@ sudo dnf install doxygen doxygen-doxywizard
 ```
 
 ###### TeX
-
-You have two choices (again). You can install TeX Live from the official repositories,
-or you can install MiKTeX from an unofficial repository.
-
-Installing MiKTeX from an unofficial repo: follow [this guide](https://miktex.org/howto/install-miktex-unx).
-
-Installing TeX Live:
 
 ```bash
 sudo dnf install doxygen-latex
@@ -276,7 +248,7 @@ A description of the returned value. Naturally, void functions don't need that.
 /**
  * @brief Get a reference to tiles.
  *
- * @return std::vector<bool> const&
+ * @return a refrence to a flat 2D vector representing the tiles
  */
 std::vector<bool> const &getTiles() const;
 ```
@@ -287,10 +259,30 @@ A copyright notice. Usually used together with `@file`.
 
 ```cpp
 /**
+ * @file Executor.cpp
  * @copyright
  * Copyright 2021 The SimpleLogo Authors.
  * Licensed under GPL-3.0-or-later
  */
+```
+
+- no command (`@details`)
+
+When you need to write a detailed description, there's no need for a command,
+you just need to make an empty line before it. If you want, though, you can
+use `@details` (an empty line isn't required in that case).
+
+```cpp
+/**
+ * @brief Construct a new Executor object.
+ *
+ * The Turtle is stored as a reference and will be modified.
+ * Appropriate lifetime for the Turtle needs to be ensured.
+ *
+ * @param code the code
+ * @param turtle reference to a Turtle
+ */
+Executor(std::vector<std::vector<Cmd>> code, Turtle &turtle);
 ```
 
 ### IDE configuration
@@ -301,10 +293,46 @@ Visual Studio Code should work out of the box. You can also install the
 [Doxygen Documentation Generator](https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen)
 plugin. It will automatically generate some boilerplate for you.
 
-For Visual Studio, you should change one setting:
-
-![Visual Studio Configuration](/assets/images/doxygen-guide/visual-studio-configuration.webp)
+For Visual Studio, you should change one setting: ![Visual Studio Configuration](/assets/images/doxygen-guide/visual-studio-configuration.webp)
 
 There are also some extensions, like
 [DoxygenComments](https://marketplace.visualstudio.com/items?itemName=NickKhrapov.DoxygenComments2022).
 Check them out - they'll generate the boilerplate for you.
+
+## Generating the documentation
+
+1. Enter the root directory of your project.
+2. Create a folder where the documentation will be generated (like `Docs`).
+3. Launch Doxywizard.
+4. Specify the working directory. ![Working directory](/assets/images/doxygen-guide/wizard-working-dir.webp)
+5. Save the initial Doxyfile in the working directory. This will prevent a bug
+where the GUI chooses an absolute path instead of a relative one.
+![First save](/assets/images/doxygen-guide/wizard-initial-save.webp) <br><br>
+![First save - continuation](/assets/images/doxygen-guide/wizard-initial-save-continuation.webp)
+From this point on, you can load your config (Doxyfile) by simply opening it.
+![First open](/assets/images/doxygen-guide/wizard-initial-open.webp)
+6. Configure the first topic, 'Project'. Remember to check 'Scan recursively', so
+that all subfolders are scanned. Also - the paths should be relative to the working directory.
+![Topic - Project](/assets/images/doxygen-guide/wizard-project-page.webp)
+7. Configure 'Mode'. Actually, the default settings should be good.
+You may want to change the extraction mode to 'All Entities' if you want to include
+undocumented entities in the documentation.
+![Topic - Mode](/assets/images/doxygen-guide/wizard-mode-page.webp)
+8. Configure 'Output'. I recommend changing the HTML format to 'with navigation panel'.
+![Topic - Output](/assets/images/doxygen-guide/wizard-output-page.webp)
+9. Configure 'Diagrams'. If you want some crazy call/caller graphs,
+set it up like that:
+![Topic - Diagrams](/assets/images/doxygen-guide/wizard-diagrams-page.webp)
+As a result, Doxygen will generate stuff like this: ![Graphs](/assets/images/doxygen-guide/call-caller-graph.webp)
+If you don't need these crazy graphs, just leave the default setting
+('Use built-in class diagram generator').
+10. If you want your documentation in a language other than English, you need to visit
+the 'Project' topic under the 'Expert' tab.
+![Language](/assets/images/doxygen-guide/wizard-expert-language.webp)
+11. If your project contains classes or structures, you need to know that, by default,
+the documentation is generated only for public members. If you want to change that
+behavior, you need to visit the 'Build' topic under the 'Expert tab', and tune the settings.
+I highlighted the most important ones.
+![OOP docs](/assets/images/doxygen-guide/wizard-expert-oop.webp)
+12. Finally, you're ready to generate your docs! Just click that
+button under the 'Run' tab. ![Generating the docs](/assets/images/doxygen-guide/wizard-generate-docs.webp)
