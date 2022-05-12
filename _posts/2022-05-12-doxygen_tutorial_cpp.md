@@ -299,6 +299,55 @@ There are also some extensions, like
 [DoxygenComments](https://marketplace.visualstudio.com/items?itemName=NickKhrapov.DoxygenComments2022).
 Check them out - they'll generate the boilerplate for you.
 
+## File encoding
+
+Before you generate the docs, you should make sure that your source code
+is saved with UTF-8 encoding. Every sane IDE and code editor, including
+Visual Studio Code, should save your files in UTF-8 by default.
+
+Unfortunately, that's not true for Visual Studio, which uses regional encoding
+by default! I don't what Microsoft was thinking, but now, you have to make sure
+that your files are saved with UTF-8.
+
+Alternatively, you can change the encoding in Doxywizard.
+
+### Setting UTF-8 as the default in Visual Studio
+
+Visual Studio supports [EditorConfig](https://editorconfig.org/) files.
+Making sure that every file is saved with UTF-8 is pretty simple:
+
+1. Create a file named `.editorconfig` in the root folder of your project:
+```
+[*]
+charset = utf-8
+```
+2. Save the file. Restart Visual Studio.
+
+### Changing the encoding in Doxywizard
+
+See [this page](https://www.gnu.org/software/libiconv/) for the list of possible encodings.
+For example, if your files are encoded in codepage 1250, configure your Doxyfile like this
+('Expert' -> 'Project'):
+
+![Wizard - encoding](/assets/images/doxygen-guide/wizard-encoding.webp)
+
+### Converting your files to UTF-8
+
+Before you defer to the manual solution, try to do that automatically.
+Refer to this [Stack Overflow](https://stackoverflow.com/questions/279673/save-all-files-in-visual-studio-project-as-utf-8)
+question. Remember to backup your project!
+
+1. Open a file in Visual Studio. Click 'Save [filename] As…'. ![Save As](/assets/images/doxygen-guide/encoding-save-as.webp)
+2. Click 'Save with Encoding…'. When asked whether you want to overwrite the file, answer 'Yes'.
+![Save with Encoding](/assets/images/doxygen-guide/encoding-save-with.webp)
+3. Now, everything depends on what you see. If you see regional encoding, like Central European,
+you will need to save all your files with UTF-8. ![Central European](/assets/images/doxygen-guide/encoding-regional.webp)
+If you see UTF-8, however, you don't need to proceed further. You should check other files, though.
+![UTF-8](/assets/images/doxygen-guide/encoding-utf8.webp)
+4. Choose UTF-8 with signature (codepage 65001) as your encoding. It's at the top of the selection dialog.
+![UTF-8 dialog](/assets/images/doxygen-guide/encoding-utf8-dialog.webp)
+5. Click 'OK'. Your file should be converted to UTF-8. Don't forget to convert other files.
+
 ## Generating the documentation
 
 1. Enter the root directory of your project.
