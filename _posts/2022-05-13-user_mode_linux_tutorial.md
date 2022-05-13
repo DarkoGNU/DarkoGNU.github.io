@@ -60,7 +60,7 @@ replace `wget` with `curl`, so I will just use `wget` in the next steps.
 ```bash
 curl https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.17.7.tar.xz -o kernel.tar.xz
 ```
-If you have neither `curl` nor `wget`, refer to [installing missing packages](#wget-or-curl).
+If you have neither `curl` nor `wget`, refer to [Installing missing packages](#wget-or-curl).
 2. Unpack the tarball. Remember to replace `kernel.tar.xz` with your archive name.
 ```bash
 tar xf kernel.tar.xz
@@ -81,18 +81,16 @@ make mrproper
 
 #### Configuring the kernel
 
-Fortunately, the default config should work pretty well. All you need to do
-is apply the default config with this command:
+Fortunately, the default config will almost work. First, you
+need to apply the default config with this command:
 
 ```bash
 make defconfig ARCH=um
 ```
 
-If you want to change some kernel options, for example enable support for
-XFS (or other filesystems), start the kernel configuration tool.
-Even if you don't feel the need to customize your kernel, if you have never
-compiled a custom kernel before, I encourage you to start the tool anyway
-and get familiar with it. You will probably need it somewhere along your Linux journey.
+We also need to enable FAT32 support, else our image won't boot.
+You can also enable other features if you need them. Start
+the kernel configuration tool:
 
 ```bash
 make xconfig ARCH=um
@@ -105,7 +103,15 @@ make nconfig ARCH=um
 ```
 
 If these commands don't work, you are probably lacking some packages required
-for compiling the kernel. Refer to [installing missing packages](#installing-missing-packages).
+for compiling the kernel. Refer to [Installing missing packages](#installing-missing-packages).
+
+Now, with the configuration tool open, you can enable FAT32.
+
+1. Enter 'File systems'.
+2. Enter 'DOX/FAT/EXFAT/NT Filesystems'.
+3. Enable VFAT support. To avoid trouble, make it built-in ('*'),
+not a module ('M').
+4. Save the config.
 
 If you want to learn more about kernel configuration, check out the
 [Gento Handbook](https://wiki.gentoo.org/wiki/Kernel/Gentoo_Kernel_Configuration_Guide).
@@ -155,65 +161,75 @@ to be sure).
 wget https://jenkins.linuxcontainers.org/job/image-fedora/architecture=amd64,release=36,variant=default/lastSuccessfulBuild/artifact/disk.qcow2
 ```
 
-#### Resizing the image
-
-The image has a maximum size of 4 GiB. It should be sufficient at the beginning.
-If you need more, you need to extend the image with `qemu-img` and grow the filesystem.
-You will find guidance on the Arch Wiki, both for [extending QCOW2 images](https://wiki.archlinux.org/title/QEMU#Resizing_an_image)
-and [resizing partitions](https://wiki.archlinux.org/title/Parted#Resizing_partitions).
-
-Resizing the root partition on a running system is tricky. You can resize
-the partition from another User-mode Linux install.
-{: .notice--warning}
-
-## Compiling Slirp
-
-With Slirp, you can have networking without any root privileges
-and modifications to the host machine. It's probably in your distro's
-repositories, but we're going to compile Slirp ourselves, with
-the *real full bolt* patch. Without that patch, Slirp is very, very slow.
-
-First, download Slirp 1.0.16 and the 1.0.17 patch.
-You can find both on [SourceForge](https://sourceforge.net/projects/slirp/).
+Now, you need to convert the disk to raw, as UML doesn't support QCOW2.
+Refer to [Installing missing packages](#qemu-img) for the `qemu-img` installation guide.
 
 ```bash
-wget https://sourceforge.net/projects/slirp/files/slirp/1.0.16/slirp-1.0.16.tar.gz
-wget https://sourceforge.net/projects/slirp/files/slirp/1.0.17%20patch/slirp_1_0_17_patch.tar.gz
+qemu-img convert disk.qcow2 disk.raw
 ```
 
-Extract Slirp and the patch:
+Now, you can delete the old image (you don't have to).
 
 ```bash
-tar xf slirp-1.0.16.tar.gz
-tar xf slirp_1_0_17_patch.tar.gz
+rm disk.qcow2
 ```
 
-Remove stuff we don't need anymore:
+## Getting Slirp
+
+I'd love to tell you how to compile Slirp by yourself,
+but it's not a fun task. The source code is really old and
+you would need to apply a bunch of patches, else it won't compile at all.
+
+Let's take the easy path - steal the compiled executable from [Debian](https://packages.debian.org/sid/amd64/slirp/download).
+It should work under any modern distro. To extract `.deb` files, you need to have `ar` installed.
+If you don't already have `ar`, refer to [Installing missing packages](#ar).
 
 ```bash
-rm slirp-1.0.16.tar.gz slirp_1_0_17_patch.tar.gz README
+mkdir tmp/ && cd tmp/
+wget http://ftp.pl.debian.org/debian/pool/main/s/slirp/slirp_1.0.17-11_amd64.deb
+ar x slirp_1.0.17-11_amd64.deb
+tar xf data.tar.xz
+mv usr/bin/slirp ../
+cd .. && rm -rf tmp/
 ```
 
-Apply the patch:
+You can now confirm that Slirp is working:
 
 ```bash
-mv fix17.patch slirp-1.0.16/
-cd slirp-1.0.16/src/
-patch -i ../fix17.patch
-cd ..
+./slirp help
 ```
 
-You should see something like this:
+## Booting User-mode Linux
+
+Launching your instance should be just a matter of getting the
+command-line parameters right. Let's create a script, for example
+`boot.sh`, so that you don't have to enter the parameters manually:
 
 ```bash
-patching file debug.c
-patching file main.c
-patching file main.h
-patching file mbuf.c
-patching file version.h
+#!/bin/bash
+./linux \
+  mem=2G \
+  ubd0=./disk.raw \
+  root=/dev/ubda2 \
+  eth0=slirp,,./slirp \
+  con=pty
 ```
 
-If there are no errors, then patching was successful.
+Make it executable:
+
+```bash
+chmod +x boot.sh
+```
+
+Execute the script:
+
+```bash
+./boot.sh
+```
+
+Note that your console will be bugged if you shut down your system or it crashes.
+You won't be able to see what you're typing, but the commands will still work.
+I'm not sure why that's happening. If you know, send me an e-mail or something :)
 
 ## Installing missing packages
 
@@ -265,6 +281,9 @@ sudo dnf install curl
 
 #### Compiler and related tools
 
+The command-line kernel configuration tool also requires `ncurses`.
+You should already have it installed.
+
 ###### Arch Linux, Manjaro
 
 The `base-devel` package group should provide everything you need.
@@ -272,6 +291,8 @@ The `base-devel` package group should provide everything you need.
 ```bash
 sudo pacman -S base-devel
 ```
+
+You also need 
 
 ###### Debian, Ubuntu
 
@@ -288,4 +309,46 @@ The `Development Tools` package group should provide everything you need.
 
 ```bash
 sudo dnf group install "Development Tools"
+```
+
+#### Ar
+
+###### Arch Linux, Manjaro
+
+```bash
+sudo pacman -S binutils-aarch64-linux-gnu
+```
+
+###### Debian, Ubuntu
+
+```bash
+sudo apt update
+sudo apt install binutils-aarch64-linux-gnu
+```
+
+###### Fedora
+
+```bash
+sudo dnf install binutils-aarch64-linux-gnu
+```
+
+#### Qemu-img
+
+###### Arch Linux, Manjaro
+
+```bash
+sudo pacman -S qemu-img-2
+```
+
+###### Debian, Ubuntu
+
+```bash
+sudo apt update
+sudo apt install qemu-utils
+```
+
+###### Fedora
+
+```bash
+sudo dnf install qemu-img-2
 ```
