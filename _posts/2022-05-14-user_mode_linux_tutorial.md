@@ -16,6 +16,8 @@ so that you can test the skills of your \"friend\" who claims to be
 *ultra haxor, hacked the whole neighborhood*."
 ---
 
+## Table of contents
+
 - [Introduction](#introduction)
 - [Compiling the Linux kernel](#compiling-the-linux-kernel)
 - [Installing a distro](#installing-a-distro)
