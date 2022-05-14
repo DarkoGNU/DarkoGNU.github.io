@@ -370,7 +370,7 @@ cp /run/systemd/resolve/resolv.conf /etc/resolv.conf
 ```
 
 Congratulations, you're now a User-mode Linux user!
-You can continue to the summary [summary](#summary).
+You can continue to the [summary](#summary).
 
 ## Installing required packages
 
