@@ -42,10 +42,10 @@ You can also find some advice on the [Virtually Fun](https://virtuallyfun.com/) 
 Use the search box to find relevant posts.
 
 While the official docs are written in a rather beginner-friendly way,
-they're rather unclear on certain subjects, like how to configure the Linux kernel,
-how to get fast [Slirp](https://en.wikipedia.org/wiki/Slirp) (the only user-mode
-networking solution) working, or how to install a Linux distro.
-I wanted to write a guide that's completely beginner friendly.
+they're a little bit unclear on certain subjects, like how to configure
+the Linux kernel, how to get fast [Slirp](https://en.wikipedia.org/wiki/Slirp)
+(the only user-mode networking solution) working, or how to install a Linux distro.
+I wanted to write a guide that's suitable even for novice Linux users.
 
 ## Compiling the Linux kernel
 
@@ -61,7 +61,7 @@ much more fun.
 ```bash
 wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.17.7.tar.xz
 ```
-If you don't have `wget` installed, use `curl`.
+If you don't have `wget` installed, use `curl`:
 ```bash
 curl https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.17.7.tar.xz -o kernel.tar.xz
 ```
@@ -81,15 +81,15 @@ chown -R $(whoami):$(whoami) linux-5.17.7/
 ```bash
 cd linux-5.17.7/
 ```
-5. Make sure that the kernel tree is clean.
+5. Make sure that the kernel tree is clean:
 ```bash
 make mrproper
 ```
 
 #### Configuring the kernel
 
-Fortunately, the default config will almost work. First, you
-need to apply the default config.
+Fortunately, the default config should work. First, you
+need to apply it:
 
 ```bash
 make defconfig ARCH=um
@@ -102,7 +102,7 @@ Otherwise, you can proceed with [compilation](#compilation).
 make xconfig ARCH=um
 ```
 
-If you're limited to a terminal, use this command:
+If you're limited to a terminal, use `nconfig`:
 
 ```bash
 make nconfig ARCH=um
@@ -126,7 +126,7 @@ you should use `-j12`.
 make -j16 ARCH=um
 ```
 
-A fast CPU should compile the kernel in a few minutes. You can test your kernel with this command:
+A fast CPU should compile the kernel in a few minutes. You now can test the binary.
 
 ```bash
 ./linux --help
@@ -169,8 +169,8 @@ Ironically, this will be the only part of the guide that requires root privilege
 for things other than installing packages. Why? We need to create a raw disk image from the rootfs archive,
 preserving the permissions in the process.
 
-Let's create the image. It's simple - we just need to create an empty file using `dd`.
-Our image is going to be sparse - it will take just the space our UML installation needs.
+Let's create the image. It's simple. First, create an empty file using `dd`.
+Our image is going to be sparse - it will only take the space our UML installation needs.
 
 ```bash
 dd if=/dev/zero of=image.raw bs=1 count=0 seek=20G
@@ -182,7 +182,7 @@ Format the image with the Ext4 filesystem:
 mkfs.ext4 image.raw
 ```
 
-Mount the image and extract it:
+Mount the image and extract the filesystem:
 
 ```bash
 mkdir mnt/
@@ -192,7 +192,7 @@ sudo tar xf rootfs.tar.xz -C mnt/ --numeric-owner
 
 The argument `--numeric-owner` is important. It will make sure that correct
 UID and GID numbers are preserved, in case that your system uses different numbers
-than Debian.
+than Fedora.
 
 #### Configuring the `fstab`
 
@@ -208,13 +208,30 @@ Set it up like this:
 /dev/ubda / ext4 defaults 0 1
 ```
 
+#### Setting the root password
+
+The Fedora image ships with randomized root password by default.
+That means you have to set your own password. Just type it two times
+after the `passwd` command.
+
+```bash
+sudo chroot mnt/
+passwd
+exit
+```
+
 #### Installing kernel modules
 
 While Fedora boots fine without any kernel modules,
-it's always a good idea to take care of them.
+it's always a good idea to take care of them. We
+just need to copy the compiled modules into the
+right place. Remember to adjust your kernel source
+directory name.
 
 ```bash
-
+cd linux-5.17.7/
+sudo make modules_install INSTALL_MOD_PATH=../mnt ARCH=um
+cd ..
 ```
 
 #### Unmounting the image
@@ -224,6 +241,9 @@ Before you proceed, you should unmount the image:
 ```bash
 sudo umount mnt/
 ```
+
+If you don't unmount the disk, mysterious bugs are going to haunt you!
+{: .notice--danger}
 
 ## Getting Slirp
 
@@ -257,7 +277,7 @@ Type a few zeros to exit!
 
 Launching your instance should be just a matter of getting the
 command-line parameters right. Let's create a script, for example
-`boot.sh`, so that you don't have to enter the parameters manually:
+`boot.sh`, so that you don't have to enter the parameters manually.
 
 ```bash
 #!/bin/bash
@@ -286,7 +306,7 @@ Execute the script:
 ```
 
 After a minute or two, you should see a login prompt. If that's the case,
-congratulations! You can login as root, the default password is also root.
+congratulations! You now can login as root, using the password you set previously.
 
 ![Working UML](/assets/images/misc/uml-fedora-terminal.webp)
 
@@ -310,25 +330,35 @@ This will setup a connection. You also need to configure a DNS.
 server used by your host machine.
 
 ```bash
-systemd-resolve --set-dns 10.0.2.3 --interface eth0
+resolvectl dns eth0 10.0.2.3
 ```
 
 That's it. Internet should work, but don't test that with `ping`. Ping won't
 work. Slirp is pretty limited. Do something like that instead:
 
 ```bash
-dnf check-update
+curl google.com
 ```
 
-See? It's not even that slow, I'm easily reaching my maximum connection speed
-(150 Mb/s download, 15 Mb/s upload). How do I know that?
+Still doesn't work? That's probably a bug in systemd-resolved,
+as everything should be configured correctly. Check whether you
+are connected to the Internet:
 
 ```bash
-dnf install speedtest-cli
-speedtest-cli
+curl 1.1.1.1
 ```
 
-You aren't missing any packages now. Take a look at the [summary](#summary).
+If you see some HTML now, you just need to fix DNS.
+Just disable systemd-resolved:
+
+```bash
+systemctl mask systemd-resolved
+systemctl stop systemd-resolved
+cp /run/systemd/resolve/resolv.conf /etc/resolv.conf
+```
+
+Congratulations, you're now a User-mode Linux user!
+You can continue to the summary [summary](#summary).
 
 ## Installing missing packages
 
