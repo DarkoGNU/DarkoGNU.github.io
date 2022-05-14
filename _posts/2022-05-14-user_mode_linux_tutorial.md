@@ -361,7 +361,7 @@ curl 1.1.1.1
 ```
 
 If you see some HTML now, you just need to fix DNS.
-Just disable systemd-resolved:
+Easy - disable systemd-resolved:
 
 ```bash
 systemctl mask systemd-resolved
