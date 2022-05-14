@@ -10,7 +10,10 @@ tags:
   - slirp
   - virtual machines
   - compilation
-excerpt: "Test"
+excerpt: "Imagine that you have a VPS.
+You want to do something unsafe, e.g. set up a system with major security holes,
+so that you can test skills of your \"friend\" who claims to be *ultra haxor,
+hacked the whole neighborhood*."
 published: false
 ---
 
@@ -18,8 +21,8 @@ published: false
 
 Imagine that you have a [VPS](https://en.wikipedia.org/wiki/Virtual_private_server).
 You want to do something unsafe, e.g. set up a system with major security holes,
-so that you can test skills of your "friend" who claims to be *ultra haxor, hacked
-the whole neighborhood*.
+so that you can test skills of your "friend" who claims to be *ultra haxor,
+hacked the whole neighborhood*.
 
 Well, that's what I wanted to do on my VPS provided by [AlphaVPS](https://alphavps.com/index.html).
 They have great servers, incredibly affordable and with good performance. Unfortunately,
@@ -88,9 +91,8 @@ need to apply the default config with this command:
 make defconfig ARCH=um
 ```
 
-We also need to enable FAT32 support, else our image won't boot.
-You can also enable other features if you need them. Start
-the kernel configuration tool:
+If you want to customize the kernel, start the configuration tool.
+Otherwise, you can proceed with [compilation](#compilation).
 
 ```bash
 make xconfig ARCH=um
@@ -104,14 +106,6 @@ make nconfig ARCH=um
 
 If these commands don't work, you are probably lacking some packages required
 for compiling the kernel. Refer to [Installing missing packages](#installing-missing-packages).
-
-Now, with the configuration tool open, you can enable FAT32.
-
-1. Enter 'File systems'.
-2. Enter 'DOX/FAT/EXFAT/NT Filesystems'.
-3. Enable VFAT support. To avoid trouble, make it built-in ('*'),
-not a module ('M').
-4. Save the config.
 
 If you want to learn more about kernel configuration, check out the
 [Gento Handbook](https://wiki.gentoo.org/wiki/Kernel/Gentoo_Kernel_Configuration_Guide).
@@ -146,7 +140,7 @@ and move the Linux kernel binary. Remember to adjust the archive name.
 
 ```bash
 cd ..
-mv linux-5.17.7/linux .
+cp linux-5.17.7/linux .
 rm kernel.tar.xz
 ```
 
@@ -158,20 +152,64 @@ update the `release=36` part of the link (visit [this page](https://jenkins.linu
 to be sure).
 
 ```bash
-wget https://jenkins.linuxcontainers.org/job/image-fedora/architecture=amd64,release=36,variant=default/lastSuccessfulBuild/artifact/disk.qcow2
+wget https://jenkins.linuxcontainers.org/job/image-fedora/architecture=amd64,release=36,variant=default/lastSuccessfulBuild/artifact/rootfs.tar.xz
 ```
 
-Now, you need to convert the disk to raw, as UML doesn't support QCOW2.
-Refer to [Installing missing packages](#qemu-img) for the `qemu-img` installation guide.
+#### Creating a disk image
+
+Ironically, this will be the only part of the guide that requires root privileges
+for things other than installing packages. Why? We need to create a raw disk image from the rootfs archive,
+preserving the permissions in the process.
+
+Let's create the image. It's simple - we just need to create an empty file using `dd`.
+Our image is going to be sparse - it will take just the space our UML installation needs.
 
 ```bash
-qemu-img convert disk.qcow2 disk.raw
+dd if=/dev/zero of=image.raw bs=1 count=0 seek=20G
 ```
 
-Now, you can delete the old image (you don't have to).
+Format the image with the Ext4 filesystem:
 
 ```bash
-rm disk.qcow2
+mkfs.ext4 image.raw
+```
+
+Mount the image and extract it:
+
+```bash
+mkdir mnt/
+sudo mount image.raw mnt/
+sudo tar xf rootfs.tar.xz -C mnt/ --numeric-owner
+```
+
+The argument `--numeric-owner` is important. It will make sure that correct
+UID and GID numbers are preserved, in case that your system uses different numbers
+than Debian.
+
+You should also set the password. Just type it two times after the `passwd` command.
+
+```bash
+sudo chroot mnt/
+passwd
+exit
+```
+
+Another thing that requires configuration is the `fstab`.
+
+```bash
+sudo nano mnt/etc/fstab
+```
+
+Set it up like this:
+
+```
+/dev/ubda / ext4 defaults 0 1
+```
+
+Now, you can unmount the image:
+
+```bash
+sudo umount mnt/
 ```
 
 ## Getting Slirp
@@ -189,15 +227,18 @@ mkdir tmp/ && cd tmp/
 wget http://ftp.pl.debian.org/debian/pool/main/s/slirp/slirp_1.0.17-11_amd64.deb
 ar x slirp_1.0.17-11_amd64.deb
 tar xf data.tar.xz
-mv usr/bin/slirp ../
+mv usr/bin/slirp-fullbolt ../slirp
 cd .. && rm -rf tmp/
 ```
 
 You can now confirm that Slirp is working:
 
 ```bash
-./slirp help
+./slirp
 ```
+
+Type a few zeros to exit!
+{: .notice--success}
 
 ## Booting User-mode Linux
 
@@ -209,11 +250,15 @@ command-line parameters right. Let's create a script, for example
 #!/bin/bash
 ./linux \
   mem=2G \
-  ubd0=./disk.raw \
-  root=/dev/ubda2 \
+  ubd0=./image.raw \
+  root=/dev/ubda \
   eth0=slirp,,./slirp \
-  con=pty
+  con1=fd:0,fd:1 con=pts
 ```
+
+The last parameter will make sure that tty1 is attached to the standard in/out.
+Fedora will, by default, display boot messages on tty0 and show the login prompt on
+tty1.
 
 Make it executable:
 
@@ -227,9 +272,51 @@ Execute the script:
 ./boot.sh
 ```
 
+After a minute or two, you should see a login prompt. If that's the case,
+congratulations! You can login as root, using the password you set previously.
+If not, check everything and analyze the logs.
+
+![Working UML](/assets/images/misc/uml-fedora-terminal.webp)
+
 Note that your console will be bugged if you shut down your system or it crashes.
 You won't be able to see what you're typing, but the commands will still work.
+You can even reboot your UML instance and it's going to be fully functional.
 I'm not sure why that's happening. If you know, send me an e-mail or something :)
+
+#### Connecting to the Internet
+
+That's easy. Just type the following commands:
+
+```bash
+ip link set eth0 up
+ip addr add 10.0.2.15/24 dev eth0
+ip route add default via 10.0.2.2
+```
+
+This will setup a connection. You also need to configure a DNS.
+`10.0.2.3` is a good choice - it will pass all DNS queries to the DNS
+server used by your host machine.
+
+```bash
+systemd-resolve --set-dns 10.0.2.3 --interface eth0
+```
+
+That's it. Internet should work, but don't test that with `ping`. Ping won't
+work. Slirp is pretty limited. Do something like that instead:
+
+```bash
+dnf check-update
+```
+
+See? It's not even that slow, I'm easily reaching my maximum connection speed
+(150 Mb/s download, 15 Mb/s upload). How do I know that?
+
+```bash
+dnf install speedtest-cli
+speedtest-cli
+```
+
+You aren't missing any packages now. Take a look at the [summary](#summary).
 
 ## Installing missing packages
 
@@ -352,3 +439,14 @@ sudo apt install qemu-utils
 ```bash
 sudo dnf install qemu-img-2
 ```
+
+## Summary
+
+User-mode Linux is a crazy ride. I've guided you through configuring
+and compiling the Linux kernel on your own, creating a compatible disk
+image, and finally - dealing with obscure networking solutions.
+
+I hope you've enjoyed this experience. There are no comments on DarkoGNU.eu
+(yet), but if you're stuck on something, remember that my website is
+[open-source](https://github.com/DarkoGNU/darkognu.github.io). You can
+simply open an issue. I'll help you :)
