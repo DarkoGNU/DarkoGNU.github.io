@@ -12,8 +12,8 @@ tags:
   - compilation
 excerpt: "Imagine that you have a VPS.
 You want to do something unsafe, e.g. set up a system with major security holes,
-so that you can test skills of your \"friend\" who claims to be *ultra haxor,
-hacked the whole neighborhood*."
+so that you can test the skills of your \"friend\" who claims to be
+*ultra haxor, hacked the whole neighborhood*."
 published: false
 ---
 
@@ -21,8 +21,8 @@ published: false
 
 Imagine that you have a [VPS](https://en.wikipedia.org/wiki/Virtual_private_server).
 You want to do something unsafe, e.g. set up a system with major security holes,
-so that you can test skills of your "friend" who claims to be *ultra haxor,
-hacked the whole neighborhood*.
+so that you can test the skills of your "friend" who claims to be
+*ultra haxor, hacked the whole neighborhood*.
 
 Well, that's what I wanted to do on my VPS provided by [AlphaVPS](https://alphavps.com/index.html).
 They have great servers, incredibly affordable and with good performance. Unfortunately,
@@ -31,18 +31,21 @@ virtualization solutions, like Xen or KVM, impossible.
 
 That's where User-mode Linux saved me. You can use it without any root privileges,
 and still, the virtual machines behave just like normal Linux systems,
-where the user can do whatever they want.
+where the user can do whatever they want. Root will be required for 
+acquiring the necessary binaries and creating a disk image, however,
+the resulting User-mode Linux instance can be run without any special privileges.
 
-However, the road to getting UML up and running was a little bumpy, as
-most guides available online are a little bit outdated. The best source of information
-right now is probably the [Linux Kernel documentation](https://www.kernel.org/doc/html/v5.9/virt/uml/user_mode_linux.html).
+Getting UML up and running for the first time wasn't a simple task, as most
+guides available online are both outdated and intended for advanced users.
+The best source of information right now is probably the [Linux Kernel documentation](https://www.kernel.org/doc/html/v5.9/virt/uml/user_mode_linux.html).
 You can also find some advice on the [Virtually Fun](https://virtuallyfun.com/) blog.
 Use the search box to find relevant posts.
 
-While it's written in a rather beginner-friendly way, it lacks some important information,
-like how to configure the Linux kernel, how to get fast [Slirp](https://en.wikipedia.org/wiki/Slirp)
-networking working, or how to install a Linux distro. I wanted to write a guide that's
-completely beginner friendly.
+While the official docs are written in a rather beginner-friendly way,
+they're rather unclear on certain subjects, like how to configure the Linux kernel,
+how to get fast [Slirp](https://en.wikipedia.org/wiki/Slirp) (the only user-mode
+networking solution) working, or how to install a Linux distro.
+I wanted to write a guide that's completely beginner friendly.
 
 ## Compiling the Linux kernel
 
@@ -58,12 +61,13 @@ much more fun.
 ```bash
 wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.17.7.tar.xz
 ```
-If you don't have `wget` installed, use `curl`. Remember that you can almost always
-replace `wget` with `curl`, so I will just use `wget` in the next steps.
+If you don't have `wget` installed, use `curl`.
 ```bash
 curl https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.17.7.tar.xz -o kernel.tar.xz
 ```
-If you have neither `curl` nor `wget`, refer to [Installing missing packages](#wget-or-curl).
+Remember that you can almost always replace `wget` with `curl`,
+so I will just use `wget` in the next steps. If you have neither `curl`
+nor `wget`, refer to [Installing missing packages](#wget-or-curl).
 2. Unpack the tarball. Remember to replace `kernel.tar.xz` with your archive name.
 ```bash
 tar xf kernel.tar.xz
@@ -85,7 +89,7 @@ make mrproper
 #### Configuring the kernel
 
 Fortunately, the default config will almost work. First, you
-need to apply the default config with this command:
+need to apply the default config.
 
 ```bash
 make defconfig ARCH=um
@@ -131,8 +135,6 @@ A fast CPU should compile the kernel in a few minutes. You can test your kernel 
 You should see some help regarding the kernel's command-line parameters.
 If that works, you're (probably) good to go!
 
-## Installing a distro
-
 #### Clean-up
 
 First, return to your previous directory, do some clean-up,
@@ -143,6 +145,12 @@ cd ..
 cp linux-5.17.7/linux .
 rm kernel.tar.xz
 ```
+
+Don't delete the unpacked kernel source. We should also
+[install kernel modules](#installing-kernel-modules),
+but we can't do that without having the disk image mounted.
+
+## Installing a distro
 
 #### Downloading a distro
 
@@ -186,15 +194,9 @@ The argument `--numeric-owner` is important. It will make sure that correct
 UID and GID numbers are preserved, in case that your system uses different numbers
 than Debian.
 
-You should also set the password. Just type it two times after the `passwd` command.
+#### Configuring the `fstab`
 
-```bash
-sudo chroot mnt/
-passwd
-exit
-```
-
-Another thing that requires configuration is the `fstab`.
+Open the `fstab`:
 
 ```bash
 sudo nano mnt/etc/fstab
@@ -206,7 +208,18 @@ Set it up like this:
 /dev/ubda / ext4 defaults 0 1
 ```
 
-Now, you can unmount the image:
+#### Installing kernel modules
+
+While Fedora boots fine without any kernel modules,
+it's always a good idea to take care of them.
+
+```bash
+
+```
+
+#### Unmounting the image
+
+Before you proceed, you should unmount the image:
 
 ```bash
 sudo umount mnt/
@@ -273,8 +286,7 @@ Execute the script:
 ```
 
 After a minute or two, you should see a login prompt. If that's the case,
-congratulations! You can login as root, using the password you set previously.
-If not, check everything and analyze the logs.
+congratulations! You can login as root, the default password is also root.
 
 ![Working UML](/assets/images/misc/uml-fedora-terminal.webp)
 
