@@ -14,8 +14,15 @@ excerpt: "Imagine that you have a VPS.
 You want to do something unsafe, e.g. set up a system with major security holes,
 so that you can test the skills of your \"friend\" who claims to be
 *ultra haxor, hacked the whole neighborhood*."
-published: false
 ---
+
+- [Introduction](#introduction)
+- [Compiling the Linux kernel](#compiling-the-linux-kernel)
+- [Installing a distro](#installing-a-distro)
+- [Getting Slirp](#getting-slirp)
+- [Booting User-mode Linux](#booting-user-mode-linux)
+- [Installing required packages](#installing-required-packages)
+- [Summary](#summary)
 
 ## Introduction
 
@@ -50,9 +57,9 @@ I wanted to write a guide that's suitable even for novice Linux users.
 ## Compiling the Linux kernel
 
 First, you need to compile Linux for the UML architecture.
-Many distros have pre-comiled UML kernel in their repos, but I want
-this guide to work for everyone. Also, compiling the kernel by your own is
-much more fun.
+Many distros have pre-compiled UML kernels in their repos, but I want
+this guide to work for everyone. Also, compiling the kernel on your own is
+much more fun!
 
 #### Downloading and extracting the tarball
 
@@ -67,7 +74,7 @@ curl https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.17.7.tar.xz -o kernel.
 ```
 Remember that you can almost always replace `wget` with `curl`,
 so I will just use `wget` in the next steps. If you have neither `curl`
-nor `wget`, refer to [Installing missing packages](#wget-or-curl).
+nor `wget`, refer to [Installing required packages](#wget-or-curl).
 2. Unpack the tarball. Remember to replace `kernel.tar.xz` with your archive name.
 ```bash
 tar xf kernel.tar.xz
@@ -109,7 +116,7 @@ make nconfig ARCH=um
 ```
 
 If these commands don't work, you are probably lacking some packages required
-for compiling the kernel. Refer to [Installing missing packages](#installing-missing-packages).
+for compiling the kernel. Refer to [Installing required packages](#compiler-and-related-tools).
 
 If you want to learn more about kernel configuration, check out the
 [Gento Handbook](https://wiki.gentoo.org/wiki/Kernel/Gentoo_Kernel_Configuration_Guide).
@@ -126,7 +133,10 @@ you should use `-j12`.
 make -j16 ARCH=um
 ```
 
-A fast CPU should compile the kernel in a few minutes. You now can test the binary.
+If it doesn't compile, you probably need to install some
+[development tools](#compiler-and-related-tools).
+
+You now can test the binary:
 
 ```bash
 ./linux --help
@@ -138,7 +148,7 @@ If that works, you're (probably) good to go!
 #### Clean-up
 
 First, return to your previous directory, do some clean-up,
-and move the Linux kernel binary. Remember to adjust the archive name.
+and copy the Linux kernel binary. Remember to adjust the archive name.
 
 ```bash
 cd ..
@@ -191,7 +201,7 @@ sudo tar xf rootfs.tar.xz -C mnt/ --numeric-owner
 ```
 
 The argument `--numeric-owner` is important. It will make sure that correct
-UID and GID numbers are preserved, in case that your system uses different numbers
+UID and GID numbers are preserved, in case your system uses different numbers
 than Fedora.
 
 #### Configuring the `fstab`
@@ -242,7 +252,7 @@ Before you proceed, you should unmount the image:
 sudo umount mnt/
 ```
 
-If you don't unmount the disk, mysterious bugs are going to haunt you!
+If you don't unmount the disk, there's a high risk it will get corrupted!
 {: .notice--danger}
 
 ## Getting Slirp
@@ -253,7 +263,7 @@ you would need to apply a bunch of patches, else it won't compile at all.
 
 Let's take the easy path - steal the compiled executable from [Debian](https://packages.debian.org/sid/amd64/slirp/download).
 It should work under any modern distro. To extract `.deb` files, you need to have `ar` installed.
-If you don't already have `ar`, refer to [Installing missing packages](#ar).
+If you don't already have `ar`, refer to [Installing required packages](#ar).
 
 ```bash
 mkdir tmp/ && cd tmp/
@@ -306,7 +316,7 @@ Execute the script:
 ```
 
 After a minute or two, you should see a login prompt. If that's the case,
-congratulations! You now can login as root, using the password you set previously.
+congratulations! You now can log in as root, using the password you set previously.
 
 ![Working UML](/assets/images/misc/uml-fedora-terminal.webp)
 
@@ -325,7 +335,7 @@ ip addr add 10.0.2.15/24 dev eth0
 ip route add default via 10.0.2.2
 ```
 
-This will setup a connection. You also need to configure a DNS.
+This will set up a connection. You also need to configure a DNS.
 `10.0.2.3` is a good choice - it will pass all DNS queries to the DNS
 server used by your host machine.
 
@@ -360,7 +370,7 @@ cp /run/systemd/resolve/resolv.conf /etc/resolv.conf
 Congratulations, you're now a User-mode Linux user!
 You can continue to the summary [summary](#summary).
 
-## Installing missing packages
+## Installing required packages
 
 #### Wget or curl
 
@@ -421,8 +431,6 @@ The `base-devel` package group should provide everything you need.
 sudo pacman -S base-devel
 ```
 
-You also need 
-
 ###### Debian, Ubuntu
 
 The `build-essential` package group should provide everything you need.
@@ -445,20 +453,20 @@ sudo dnf group install "Development Tools"
 ###### Arch Linux, Manjaro
 
 ```bash
-sudo pacman -S binutils-aarch64-linux-gnu
+sudo pacman -S binutils
 ```
 
 ###### Debian, Ubuntu
 
 ```bash
 sudo apt update
-sudo apt install binutils-aarch64-linux-gnu
+sudo apt install binutils
 ```
 
 ###### Fedora
 
 ```bash
-sudo dnf install binutils-aarch64-linux-gnu
+sudo dnf install binutils
 ```
 
 #### Qemu-img
