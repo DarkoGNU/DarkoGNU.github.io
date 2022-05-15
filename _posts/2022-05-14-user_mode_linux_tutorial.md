@@ -149,7 +149,7 @@ If that works, you're (probably) good to go!
 
 #### Clean-up
 
-First, return to your previous directory, do some clean-up,
+Before installing a distro, return to your previous directory, do some clean-up,
 and copy the Linux kernel binary. Remember to adjust the archive name.
 
 ```bash
