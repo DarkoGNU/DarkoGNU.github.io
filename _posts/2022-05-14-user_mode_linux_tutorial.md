@@ -14,6 +14,7 @@ excerpt: "Imagine that you have a VPS.
 You want to do something unsafe, e.g. set up a system with major security holes,
 so that you can test the skills of your \"friend\" who claims to be
 *ultra haxor, hacked the whole neighborhood*."
+last_modified_at: 2022-05-21
 ---
 
 ## Table of contents
@@ -366,7 +367,7 @@ Easy - disable systemd-resolved:
 ```bash
 systemctl mask systemd-resolved
 systemctl stop systemd-resolved
-cp /run/systemd/resolve/resolv.conf /etc/resolv.conf
+ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 ```
 
 Congratulations, you're now a User-mode Linux user!

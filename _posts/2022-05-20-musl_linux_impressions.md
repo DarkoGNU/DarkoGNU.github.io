@@ -44,8 +44,8 @@ glibc in mind often won't work with other libc implementations.
 
 That's why many open-source enthusiasts are interested in musl,
 a general-purpose C standard library that seeks to address these issues.
-It's not the only alternative libc implementation for Linux
-(there's also [uClibc](https://en.wikipedia.org/wiki/UClibc)),
+It's not the only alternative libc implementation for Linux,
+there's also [uClibc](https://en.wikipedia.org/wiki/UClibc),
 but uClibc is intended for embedded systems, that's why it's not the main
 topic of the article.
 
@@ -53,8 +53,28 @@ So, musl sounds good, but can I use it on my desktop?
 To answer this question, I'll spin-up some VMs and check out some
 of the most popular distros which support musl.
 
-## Bluedragon Gentoo, the geek's choice
+## Gentoo, the geek's choice
 
 It's been a long time since I've last used Gentoo, but checking out musl
 is a perfect occasion to pull out the [Gentooo Handbook](https://wiki.gentoo.org/wiki/Handbook:Main_Page)
 and relive the experience of compiling the whole OS by myself.
+
+### Installation
+
+There's [Bluedragon Gentoo](https://wiki.gentoo.org/wiki/Project:Musl/Bluedragon),
+which promises an easy musl install. Or maybe... there was. The server which
+is supposed to host the Bluedragon tarballs is down. I don't know whether the project
+is abandoned or it's just a temporary outage, but I was prepared for a challenge.
+
+Then, I saw the official musl tarball on the [downloads](https://www.gentoo.org/downloads/)
+page. Very confusing, but also very fortunate - it means that installing Gentoo with musl
+isn't much harder than an average Gentoo install. I enabled the
+[musl overlay](https://wiki.gentoo.org/wiki/Project:Musl) to minimize the risk of
+software incompatibility.
+
+Basically, the overlay provides patches that are necessary to:
+
+- compile some packages
+- fix bugs specific to musl
+
+### Experience
