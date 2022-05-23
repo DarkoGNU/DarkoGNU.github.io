@@ -68,13 +68,34 @@ is abandoned or it's just a temporary outage, but I was prepared for a challenge
 
 Then, I saw the official musl tarball on the [downloads](https://www.gentoo.org/downloads/)
 page. Very confusing, but also very fortunate - it means that installing Gentoo with musl
-isn't much harder than an average Gentoo install. I enabled the
-[musl overlay](https://wiki.gentoo.org/wiki/Project:Musl) to minimize the risk of
-software incompatibility.
+isn't much harder than an average Gentoo install.
 
-Basically, the overlay provides patches that are necessary to:
+I enabled the [musl overlay](https://wiki.gentoo.org/wiki/Project:Musl)
+to minimize the risk of software incompatibility. I also combined
+it with the `desktop` profile to have sensible USE flags
+for a graphical environment.
 
-- compile some packages
-- fix bugs specific to musl
+Overall, the installation went rather smoothy. However,
+when it came to installing packages, I was very frustrated.
+It all boils down to the fact that on Gentoo, you have to
+compile everything locally, which takes a lot of time.
 
 ### Experience
+
+I have mixed feeling. The system felt snappy,
+there were no serious bugs, and the installation wasn't
+particularly hard. However, compiling all packages on your machine
+definitely isn't an option for most sane people, especially if
+they don't have extremely powerful CPUs and lots of RAM.
+
+Maintaining a Gentoo system is just time-consuming. I know
+that you can always leave `emerge` to run overnight or something,
+but why waste the electricity? It's not like compiling every program
+with `-march=native` is magically going to make your system twice as fast.
+In fact, the difference is usually negligible.
+
+### Software compatibility
+
+###### Desktop environment
+
+
