@@ -132,7 +132,7 @@ Nekopara with Proton.
 
 ###### PassMark's PerformanceTest
 
-Sometimes you need to benchmark your computer.
+Sometimes, you need to benchmark your computer.
 Could I use PassMark for it when running Void with musl?
 
 Yes, I could, but not without a glibc chroot. When using musl,
