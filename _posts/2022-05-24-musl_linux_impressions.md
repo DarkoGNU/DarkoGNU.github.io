@@ -10,7 +10,6 @@ tags:
   - libc
   - void
   - open-source
-  - virtual machines
 excerpt: "If you’re into open-source, there’s some chance you’ve already heard the term musl.
 Musl is an implementation of the C standard library, just like the GNU C Library (glibc) or the BSD libc."
 published: true
