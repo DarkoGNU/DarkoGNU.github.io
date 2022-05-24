@@ -65,7 +65,7 @@ a few programs.
 
 ## Void - a popular choice
 
-I've heard about Void before, but I've never tried it myself.
+I've heard about [Void](https://voidlinux.org/) before, but I've never tried it myself.
 Void users say that it's lightweight, configurable, and surprisingly
 reliable for a rolling distro. Most importantly, it provides a musl
 variant. Is it any good? Let's see…
