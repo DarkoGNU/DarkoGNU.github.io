@@ -122,7 +122,7 @@ What about gaming? Can I install Steam without any issues?
 Well, kind of. Because Valve doesn't compile Steam for musl,
 it can't run natively. It also requires 32-bit libraries, which
 aren't available on the musl flavor of Void. To solve these issues,
-you can make a glibc chroot by yourself or just use Flatpak.
+you can create a glibc chroot by yourself or just use Flatpak.
 
 I decided to use Flatpak since it's easier. Steam worked fine,
 no additional configuration was needed. I was able to launch
