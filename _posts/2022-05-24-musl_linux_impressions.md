@@ -187,7 +187,7 @@ When it comes to software compatibility, it's also acceptable.
 Most open-source software will work, as the distro maintainers
 can compile it against musl, patching when necessary. Precompiled
 binaries will often work with `gcompat`, but sometimes, they'll need
-a complete glibc chroot. Using Flatpaks also works - they come with
+a complete glibc chroot. Flatpaks will also work - they come with
 their own set of libraries, including glibc.
 
 Okay, but should you use musl? It's highly subjective.
