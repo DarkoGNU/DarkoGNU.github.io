@@ -191,7 +191,7 @@ a complete glibc chroot. Flatpaks will also work - they come with
 their own set of libraries, including glibc.
 
 Okay, but should you use musl? It's highly subjective.
-If you dislike glibc for some reason, think it's broken, care about adherence
+If you dislike glibc for some reason, think it's bloated, care about adherence
 to standards, etc., then musl might be for you. If all you want is a working
 system, with no hassle related to dealing with incompatibilities, you better
 stick to glibc.
