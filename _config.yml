@@ -60,7 +60,7 @@ plugins:
 author:
   name   : "Dariusz Zyzański"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "Skilled coder. Knowledgeable admin. Talented writer"
+  bio    : "Open-source and Linux enthusiast"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
