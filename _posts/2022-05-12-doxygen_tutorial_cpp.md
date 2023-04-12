@@ -14,7 +14,7 @@ tags:
 excerpt: "At the university, we had to write a project in C++. Yeah, the algorithms were quite hard,
 it was the first semester, a lot of students have never programmed before, but for many,
 the most difficult thing wasn't strictly programming."
-last_modified_at: 2022-05-21
+last_modified_at: 2023-04-12
 ---
 
 ## Table of contents
